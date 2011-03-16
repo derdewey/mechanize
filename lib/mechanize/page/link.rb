@@ -36,7 +36,9 @@ class Mechanize
       end
 
       def uri
-        @href && URI.parse(WEBrick::HTTPUtils.escape(@href))
+	return nil unless @href
+	@href = @href.gsub(/%0A/,'')
+	URI.parse(WEBrick::HTTPUtils.escape(@href))
       end
 
       # Click on this link
